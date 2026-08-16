@@ -5,385 +5,422 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Free Stack — 100+ AI Tools for Students</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --pine:#1F2E27;
-    --pine-2:#28392F;
-    --paper:#F7F4EA;
-    --paper-dim:#EDE8D8;
-    --chalk:#F2C94C;
-    --coral:#EF6461;
-    --ink:#1F2E27;
-    --line: rgba(247,244,234,0.16);
+    --bg:#FFFFFF;
+    --bg-soft:#F7F7F8;
+    --bg-soft-2:#F0F1F3;
+    --ink:#0D0D0D;
+    --ink-dim:#6E6E80;
+    --line:#E5E5EA;
+    --accent:#12A594;
+    --accent-dim:#E6F6F3;
+    --accent-ink:#0B7A6D;
+    --radius:16px;
+    --shadow-sm: 0 1px 2px rgba(13,13,13,0.04), 0 1px 1px rgba(13,13,13,0.03);
+    --shadow-md: 0 8px 24px rgba(13,13,13,0.08), 0 2px 6px rgba(13,13,13,0.04);
 
-    --c-chat:#F2C94C;
-    --c-research:#6FA8DC;
-    --c-writing:#EF6461;
-    --c-study:#7FB285;
-    --c-math:#B48EDE;
-    --c-code:#3FBFBF;
-    --c-slides:#F4A261;
-    --c-design:#E56399;
-    --c-media:#5FA8D3;
-    --c-productivity:#D4A72C;
-    --c-language:#588157;
-    --c-cite:#B08968;
+    --c-chat:#12A594;
+    --c-research:#3B82F6;
+    --c-writing:#F97066;
+    --c-study:#22C55E;
+    --c-math:#A855F7;
+    --c-code:#0EA5E9;
+    --c-slides:#F59E0B;
+    --c-design:#EC4899;
+    --c-media:#6366F1;
+    --c-productivity:#D97706;
+    --c-language:#059669;
+    --c-cite:#8B7355;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:var(--pine);
-    color:var(--paper);
-    font-family:'Space Grotesk', sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing:antialiased;
   }
+  ::selection{ background:var(--accent-dim); color:var(--accent-ink); }
+  a{ color:inherit; text-decoration:none; }
 
-  ::selection{ background:var(--chalk); color:var(--pine); }
-
-  a{ color:inherit; }
-
-  .noise{
-    position:fixed; inset:0; pointer-events:none; opacity:0.05; z-index:0;
-    background-image: radial-gradient(rgba(247,244,234,0.6) 0.6px, transparent 0.6px);
-    background-size: 3px 3px;
-  }
-
-  header.hero{
-    position:relative;
-    max-width:1180px;
-    margin:0 auto;
-    padding:64px 32px 40px;
-    border-bottom:1px solid var(--line);
-  }
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--chalk);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:22px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:22px; height:1px; background:var(--chalk); display:inline-block;
-  }
-  h1.headline{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(2.4rem, 6vw, 4.6rem);
-    line-height:1.02;
-    letter-spacing:-0.01em;
-    margin:0 0 22px;
-    max-width:14ch;
-  }
-  h1.headline em{
-    font-style:italic;
-    font-weight:500;
-    color:var(--chalk);
-  }
-  .sub{
-    font-size:17px;
-    line-height:1.6;
-    max-width:56ch;
-    color:rgba(247,244,234,0.78);
-    margin:0 0 34px;
-  }
-  .stat-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:34px;
-    margin-top:8px;
-  }
-  .stat{
-    font-family:'JetBrains Mono', monospace;
-  }
-  .stat .n{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:2rem;
-    display:block;
-    color:var(--paper);
-    line-height:1;
-  }
-  .stat .l{
-    font-size:11px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:rgba(247,244,234,0.55);
-  }
-
-  /* card catalog drawer bar */
-  .drawer-bar{
+  /* ---------- top nav ---------- */
+  .nav{
     position:sticky;
     top:0;
-    z-index:20;
-    background:var(--pine);
+    z-index:30;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
-    padding:16px 32px;
   }
-  .drawer-inner{
-    max-width:1180px;
+  .nav-inner{
+    max-width:1120px;
     margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  .search-row{
+    padding:14px 24px;
     display:flex;
     align-items:center;
     gap:14px;
   }
-  .search-wrap{
-    flex:1;
-    position:relative;
+  .logo{
     display:flex;
     align-items:center;
-    border-bottom:1.5px solid rgba(247,244,234,0.3);
-    padding-bottom:6px;
-    transition:border-color 0.2s ease;
+    gap:9px;
+    font-weight:700;
+    font-size:15px;
+    white-space:nowrap;
   }
-  .search-wrap:focus-within{ border-color:var(--chalk); }
-  .search-wrap svg{ flex-shrink:0; opacity:0.6; margin-right:10px; }
-  #search{
-    flex:1;
-    background:transparent;
-    border:none;
-    outline:none;
-    color:var(--paper);
-    font-family:'Space Grotesk', sans-serif;
-    font-size:16px;
-    padding:6px 0;
+  .logo-mark{
+    width:26px; height:26px;
+    border-radius:8px;
+    background:linear-gradient(135deg, var(--accent), #37D6C0);
+    display:flex; align-items:center; justify-content:center;
+    color:white;
+    font-size:13px;
+    flex-shrink:0;
   }
-  #search::placeholder{ color:rgba(247,244,234,0.4); }
-  .drawer-count{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    color:var(--chalk);
+  .nav-spacer{ flex:1; }
+  .nav-count{
+    font-size:13px;
+    color:var(--ink-dim);
+    background:var(--bg-soft);
+    padding:6px 12px;
+    border-radius:999px;
     white-space:nowrap;
   }
 
-  .tabs{
+  /* ---------- hero ---------- */
+  .hero{
+    max-width:1120px;
+    margin:0 auto;
+    padding:64px 24px 28px;
+    text-align:center;
+  }
+  .hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:var(--accent-dim);
+    color:var(--accent-ink);
+    font-size:13px;
+    font-weight:600;
+    padding:7px 14px;
+    border-radius:999px;
+    margin-bottom:22px;
+    opacity:0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .hero-badge .pulse{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--accent);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  h1{
+    font-size:clamp(2rem, 5vw, 3.4rem);
+    font-weight:800;
+    line-height:1.12;
+    letter-spacing:-0.03em;
+    margin:0 0 16px;
+    opacity:0;
+    animation: fadeUp 0.6s ease 0.08s forwards;
+  }
+  h1 .grad{
+    background:linear-gradient(135deg, var(--accent), #2563EB);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p{
+    font-size:17px;
+    line-height:1.6;
+    color:var(--ink-dim);
+    max-width:52ch;
+    margin:0 auto 34px;
+    opacity:0;
+    animation: fadeUp 0.6s ease 0.16s forwards;
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.4; transform:scale(1.3); }
+  }
+
+  /* ---------- search ---------- */
+  .search-shell{
+    max-width:640px;
+    margin:0 auto 18px;
+    opacity:0;
+    animation: fadeUp 0.6s ease 0.24s forwards;
+  }
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--bg-soft);
+    border:1.5px solid transparent;
+    border-radius:14px;
+    padding:14px 18px;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .search-box:focus-within{
+    border-color:var(--accent);
+    background:var(--bg);
+    box-shadow: var(--shadow-md);
+  }
+  .search-box svg{ color:var(--ink-dim); flex-shrink:0; }
+  #search{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-family:'Inter', sans-serif;
+    font-size:15.5px;
+    color:var(--ink);
+  }
+  #search::placeholder{ color:var(--ink-dim); }
+  .kbd{
+    font-size:11px;
+    color:var(--ink-dim);
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:2px 7px;
+    font-family:monospace;
+  }
+
+  /* ---------- filter pills ---------- */
+  .pills{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px 8px;
     display:flex;
     flex-wrap:wrap;
+    justify-content:center;
     gap:8px;
+    opacity:0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
   }
-  .tab{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.03em;
-    padding:7px 13px;
-    border-radius:3px;
-    background:var(--pine-2);
-    border:1px solid transparent;
-    color:rgba(247,244,234,0.7);
-    cursor:pointer;
-    user-select:none;
-    transition: all 0.15s ease;
+  .pill{
     display:flex;
     align-items:center;
     gap:7px;
-  }
-  .tab .dot{
-    width:7px; height:7px; border-radius:50%; display:inline-block;
-    background:var(--dot,#888);
-  }
-  .tab:hover{ color:var(--paper); border-color:rgba(247,244,234,0.25); }
-  .tab.active{
-    background:var(--paper);
-    color:var(--pine);
-    border-color:var(--paper);
+    font-size:13.5px;
     font-weight:500;
+    padding:9px 15px;
+    border-radius:999px;
+    background:var(--bg-soft);
+    color:var(--ink-dim);
+    cursor:pointer;
+    user-select:none;
+    border:1.5px solid transparent;
+    transition: all 0.15s ease;
   }
-  .tab.active .dot{ background:var(--pine); }
+  .pill:hover{ background:var(--bg-soft-2); color:var(--ink); }
+  .pill .dot{ width:8px; height:8px; border-radius:50%; background:var(--dot,#999); flex-shrink:0; }
+  .pill.active{
+    background:var(--ink);
+    color:white;
+    border-color:var(--ink);
+  }
+  .pill.active .dot{ background:white; }
+  .pill .n{ opacity:0.55; font-size:12px; }
 
+  /* ---------- grid ---------- */
   main{
-    max-width:1180px;
+    max-width:1120px;
     margin:0 auto;
-    padding:36px 32px 20px;
-    position:relative;
-    z-index:1;
+    padding:36px 24px 30px;
   }
-
   #grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(272px, 1fr));
-    gap:18px;
+    grid-template-columns:repeat(auto-fill, minmax(268px, 1fr));
+    gap:16px;
   }
-
   .card{
-    background:var(--paper);
-    color:var(--ink);
-    border-radius:2px;
-    padding:20px 20px 18px;
-    position:relative;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
     display:flex;
     flex-direction:column;
-    min-height:190px;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.12);
-    border-top:4px solid var(--accent, var(--chalk));
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: var(--shadow-sm);
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(10px);
+    animation: cardIn 0.5s ease forwards;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   }
   .card:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    transform:translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color:var(--accent);
   }
-  .card-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:10px;
-    margin-bottom:10px;
+  @keyframes cardIn{
+    to{ opacity:1; transform:translateY(0); }
   }
-  .card-num{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10.5px;
-    letter-spacing:0.03em;
-    color:rgba(31,46,39,0.42);
+  .card-icon{
+    width:38px; height:38px;
+    border-radius:10px;
+    background:var(--tint, var(--accent-dim));
+    color:var(--accent, var(--ink));
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+    font-size:15px;
+    margin-bottom:14px;
   }
   .card-name{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:1.2rem;
-    line-height:1.2;
-    margin:2px 0 8px;
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0 0 6px;
   }
   .card-blurb{
     font-size:13.5px;
     line-height:1.5;
-    color:rgba(31,46,39,0.78);
+    color:var(--ink-dim);
+    margin:0 0 16px;
     flex:1;
-    margin:0 0 14px;
   }
   .card-bottom{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     gap:10px;
-    border-top:1px dashed rgba(31,46,39,0.2);
-    padding-top:11px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
   }
   .card-free{
-    font-size:11px;
-    color:rgba(31,46,39,0.65);
-    line-height:1.3;
-    max-width:70%;
-  }
-  .card-link{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    text-decoration:none;
-    color:var(--pine);
-    font-weight:700;
+    font-size:11.5px;
+    font-weight:600;
+    color:var(--accent-ink);
+    background:var(--accent-dim);
+    padding:4px 9px;
+    border-radius:999px;
     white-space:nowrap;
-    border-bottom:1px solid var(--pine);
-    padding-bottom:1px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:60%;
   }
-  .card-tag{
-    position:absolute;
-    top:-4px; right:16px;
-    width:14px; height:16px;
-    background:var(--accent, var(--chalk));
-    border-radius:0 0 3px 3px;
+  .card-arrow{
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--bg-soft);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+  .card:hover .card-arrow{
+    background:var(--ink);
+    color:white;
+    transform:rotate(45deg);
   }
 
   .empty-state{
     grid-column:1/-1;
     text-align:center;
-    padding:60px 20px;
-    color:rgba(247,244,234,0.5);
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
+    padding:70px 20px;
+    color:var(--ink-dim);
   }
+  .empty-state .emoji{ font-size:34px; margin-bottom:10px; }
 
   footer{
-    max-width:1180px;
-    margin:40px auto 0;
-    padding:28px 32px 60px;
+    max-width:1120px;
+    margin:20px auto 0;
+    padding:26px 24px 56px;
     border-top:1px solid var(--line);
     font-size:13px;
-    color:rgba(247,244,234,0.5);
+    color:var(--ink-dim);
     line-height:1.6;
+    text-align:center;
   }
-  footer strong{ color:rgba(247,244,234,0.8); }
+  footer strong{ color:var(--ink); }
 
   @media (max-width: 640px){
-    header.hero{ padding:44px 20px 30px; }
-    .drawer-bar{ padding:14px 20px; }
-    main{ padding:28px 20px 16px; }
-    footer{ padding:24px 20px 48px; }
+    .hero{ padding:44px 20px 20px; }
+    main{ padding:26px 16px 20px; }
+    #grid{ grid-template-columns:1fr 1fr; gap:12px; }
+    .card{ padding:15px; }
+    .kbd{ display:none; }
+  }
+  @media (max-width: 420px){
     #grid{ grid-template-columns:1fr; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    *{ transition:none !important; scroll-behavior:auto !important; }
+    *{ animation:none !important; transition:none !important; }
+    .hero-badge, h1, .hero p, .search-shell, .pills, .card{ opacity:1 !important; transform:none !important; }
   }
 </style>
 </head>
 <body>
-<div class="noise"></div>
 
-<header class="hero">
-  <div class="eyebrow">A field guide · updated for the 2026 semester</div>
-  <h1 class="headline">Every free AI tool worth a student's <em>tab space.</em></h1>
-  <p class="sub">109 tools, filed by subject like a card catalog — chatbots, research, writing, study aids, math, code, slides, design, media, and more. No trials that quietly start billing you. Search, or pull a drawer below.</p>
-  <div class="stat-row">
-    <div class="stat"><span class="n">109</span><span class="l">tools catalogued</span></div>
-    <div class="stat"><span class="n">12</span><span class="l">subjects</span></div>
-    <div class="stat"><span class="n">$0</span><span class="l">required to start</span></div>
-  </div>
-</header>
-
-<div class="drawer-bar">
-  <div class="drawer-inner">
-    <div class="search-row">
-      <div class="search-wrap">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input id="search" type="text" placeholder="Search by name or task — “cite a source”, “edit a video”, “solve for x”…" autocomplete="off">
-      </div>
-      <div class="drawer-count" id="count">109 cards</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">
+      <span class="logo-mark">✦</span>
+      The Free Stack
     </div>
-    <div class="tabs" id="tabs"></div>
+    <div class="nav-spacer"></div>
+    <div class="nav-count" id="navCount">109 tools</div>
   </div>
-</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge"><span class="pulse"></span> Updated for the 2026 semester</div>
+  <h1>Every free AI tool worth<br class="br-desktop"> your <span class="grad">tab space.</span></h1>
+  <p>109 tools for students — writing, research, coding, study help, and more. All genuinely free to start. No hidden trials.</p>
+
+  <div class="search-shell">
+    <div class="search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="search" type="text" placeholder="Search tools..." autocomplete="off">
+      <span class="kbd">/</span>
+    </div>
+  </div>
+</section>
+
+<div class="pills" id="pills"></div>
 
 <main>
   <div id="grid"></div>
 </main>
 
 <footer>
-  <strong>How to use this without losing the semester to it:</strong> pick one tool per job — one chatbot, one research helper, one writing checker — before adding more. Free tiers change their limits often, so if a link feels off, check the tool's own pricing page before you rely on it for a graded deadline. Always check your syllabus and honor code before using AI on an assignment.
+  Pick one tool per task before adding more — one chatbot, one research helper, one writing checker.<br>
+  <strong>Always check your syllabus and honor code</strong> before using AI on graded work.
 </footer>
 
 <script>
 const CATS = [
-  {key:"chat", label:"Chatbots", color:"var(--c-chat)"},
-  {key:"research", label:"Research", color:"var(--c-research)"},
-  {key:"writing", label:"Writing", color:"var(--c-writing)"},
-  {key:"study", label:"Study & Notes", color:"var(--c-study)"},
-  {key:"math", label:"Math & Science", color:"var(--c-math)"},
-  {key:"code", label:"Coding", color:"var(--c-code)"},
-  {key:"slides", label:"Slides", color:"var(--c-slides)"},
-  {key:"design", label:"Design & Images", color:"var(--c-design)"},
-  {key:"media", label:"Video & Audio", color:"var(--c-media)"},
-  {key:"productivity", label:"Productivity", color:"var(--c-productivity)"},
-  {key:"language", label:"Language", color:"var(--c-language)"},
-  {key:"cite", label:"Citations", color:"var(--c-cite)"},
+  {key:"chat", label:"Chatbots", color:"var(--c-chat)", icon:"💬"},
+  {key:"research", label:"Research", color:"var(--c-research)", icon:"🔎"},
+  {key:"writing", label:"Writing", color:"var(--c-writing)", icon:"✍️"},
+  {key:"study", label:"Study & Notes", color:"var(--c-study)", icon:"📚"},
+  {key:"math", label:"Math & Science", color:"var(--c-math)", icon:"∑"},
+  {key:"code", label:"Coding", color:"var(--c-code)", icon:"⌘"},
+  {key:"slides", label:"Slides", color:"var(--c-slides)", icon:"▤"},
+  {key:"design", label:"Design", color:"var(--c-design)", icon:"◆"},
+  {key:"media", label:"Video & Audio", color:"var(--c-media)", icon:"▶"},
+  {key:"productivity", label:"Productivity", color:"var(--c-productivity)", icon:"✓"},
+  {key:"language", label:"Language", color:"var(--c-language)", icon:"A"},
+  {key:"cite", label:"Citations", color:"var(--c-cite)", icon:"❝"},
 ];
 
 const TOOLS = [
-{n:"ChatGPT",cat:"chat",url:"https://chatgpt.com",b:"Ask questions, brainstorm, and get quick explanations for any subject.",f:"Free plan, usage limits"},
-{n:"Claude",cat:"chat",url:"https://claude.ai",b:"Strong at long documents, essay feedback, and careful reasoning.",f:"Free plan, daily limits"},
-{n:"Google Gemini",cat:"chat",url:"https://gemini.google.com",b:"Built into Docs, Gmail, and Search for research and writing help.",f:"Free with a Google account"},
-{n:"Microsoft Copilot",cat:"chat",url:"https://copilot.microsoft.com",b:"Free chat plus Office-style help inside Edge and Windows.",f:"Free, no account needed"},
-{n:"Perplexity",cat:"chat",url:"https://perplexity.ai",b:"Answers your question and shows the sources it used to get there.",f:"Free tier, limited Pro searches"},
+{n:"ChatGPT",cat:"chat",url:"https://chatgpt.com",b:"Ask questions, brainstorm, and get quick explanations for any subject.",f:"Free plan"},
+{n:"Claude",cat:"chat",url:"https://claude.ai",b:"Strong at long documents, essay feedback, and careful reasoning.",f:"Free plan"},
+{n:"Google Gemini",cat:"chat",url:"https://gemini.google.com",b:"Built into Docs, Gmail, and Search for research and writing help.",f:"Free"},
+{n:"Microsoft Copilot",cat:"chat",url:"https://copilot.microsoft.com",b:"Free chat plus Office-style help inside Edge and Windows.",f:"Free"},
+{n:"Perplexity",cat:"chat",url:"https://perplexity.ai",b:"Answers your question and shows the sources it used to get there.",f:"Free tier"},
 {n:"Meta AI",cat:"chat",url:"https://meta.ai",b:"Quick answers inside WhatsApp, Instagram, and its own app.",f:"Free"},
-{n:"Poe",cat:"chat",url:"https://poe.com",b:"One app to try ChatGPT, Claude, and Gemini side by side.",f:"Free daily message credits"},
+{n:"Poe",cat:"chat",url:"https://poe.com",b:"One app to try ChatGPT, Claude, and Gemini side by side.",f:"Free credits"},
 {n:"HuggingChat",cat:"chat",url:"https://huggingface.co/chat",b:"Open-source chatbot with no login wall for quick questions.",f:"Free"},
 {n:"You.com",cat:"chat",url:"https://you.com",b:"Chat with cited web results and lightweight study tools.",f:"Free tier"},
 {n:"Pi",cat:"chat",url:"https://pi.ai",b:"A more conversational assistant for talking through ideas out loud.",f:"Free"},
@@ -397,47 +434,47 @@ const TOOLS = [
 {n:"Litmaps",cat:"research",url:"https://litmaps.com",b:"Tracks citation trails so you don't miss key related work.",f:"Free tier"},
 {n:"ResearchRabbit",cat:"research",url:"https://researchrabbit.ai",b:"A Spotify-like recommendation engine for your next paper.",f:"Free"},
 {n:"Explainpaper",cat:"research",url:"https://explainpaper.com",b:"Highlight a confusing paragraph in a paper and get it explained.",f:"Free tier"},
-{n:"Scholarcy",cat:"research",url:"https://scholarcy.com",b:"Turns a long paper into a structured, skimmable summary card.",f:"Free browser extension"},
+{n:"Scholarcy",cat:"research",url:"https://scholarcy.com",b:"Turns a long paper into a structured, skimmable summary card.",f:"Free extension"},
 {n:"OpenRead",cat:"research",url:"https://openread.academy",b:"Reads and annotates papers alongside an AI research assistant.",f:"Free tier"},
 
 {n:"Grammarly",cat:"writing",url:"https://grammarly.com",b:"Catches grammar, tone, and clarity issues as you type.",f:"Free plan"},
-{n:"QuillBot",cat:"writing",url:"https://quillbot.com",b:"Paraphrases and summarizes text to help you rewrite in your own words.",f:"Free plan, daily limits"},
+{n:"QuillBot",cat:"writing",url:"https://quillbot.com",b:"Paraphrases and summarizes text to help you rewrite in your own words.",f:"Free plan"},
 {n:"Wordtune",cat:"writing",url:"https://wordtune.com",b:"Suggests rewrites to make a stiff sentence read more naturally.",f:"Free plan"},
-{n:"ProWritingAid",cat:"writing",url:"https://prowritingaid.com",b:"Deeper style and structure reports than a basic grammar check.",f:"Free plan, limits"},
+{n:"ProWritingAid",cat:"writing",url:"https://prowritingaid.com",b:"Deeper style and structure reports than a basic grammar check.",f:"Free plan"},
 {n:"Hemingway Editor",cat:"writing",url:"https://hemingwayapp.com",b:"Flags dense, hard-to-read sentences right in the browser.",f:"Free"},
 {n:"LanguageTool",cat:"writing",url:"https://languagetool.org",b:"Multilingual grammar checker that plugs into Docs and Word.",f:"Free plan"},
 {n:"Sapling",cat:"writing",url:"https://sapling.ai",b:"Grammar and phrasing suggestions built for faster drafting.",f:"Free tier"},
 {n:"Ginger",cat:"writing",url:"https://gingersoftware.com",b:"Grammar checker with a built-in translator, handy for ESL writers.",f:"Free plan"},
 {n:"Trinka",cat:"writing",url:"https://trinka.ai",b:"A grammar checker tuned specifically for academic writing.",f:"Free plan"},
-{n:"Jenni AI",cat:"writing",url:"https://jenni.ai",b:"Autocomplete for essays that helps you get past writer's block.",f:"Free word limit"},
+{n:"Jenni AI",cat:"writing",url:"https://jenni.ai",b:"Autocomplete for essays that helps you get past writer's block.",f:"Free limit"},
 {n:"Copy.ai",cat:"writing",url:"https://copy.ai",b:"Templates for outlines, summaries, and rewriting short passages.",f:"Free plan"},
-{n:"Rytr",cat:"writing",url:"https://rytr.me",b:"Generates short drafts and outlines from a simple prompt.",f:"Free monthly credits"},
+{n:"Rytr",cat:"writing",url:"https://rytr.me",b:"Generates short drafts and outlines from a simple prompt.",f:"Free credits"},
 
 {n:"Quizlet",cat:"study",url:"https://quizlet.com",b:"Turns your notes into flashcards and practice tests automatically.",f:"Free plan"},
-{n:"Khanmigo",cat:"study",url:"https://khanacademy.org",b:"A tutor that asks guiding questions instead of handing you answers.",f:"Free for students"},
+{n:"Khanmigo",cat:"study",url:"https://khanacademy.org",b:"A tutor that asks guiding questions instead of handing you answers.",f:"Free"},
 {n:"StudyFetch",cat:"study",url:"https://studyfetch.com",b:"Builds a personalized study plan from your own class materials.",f:"Free tier"},
-{n:"Otter.ai",cat:"study",url:"https://otter.ai",b:"Transcribes lectures live and summarizes the key points after.",f:"Free plan, monthly minutes"},
+{n:"Otter.ai",cat:"study",url:"https://otter.ai",b:"Transcribes lectures live and summarizes the key points after.",f:"Free plan"},
 {n:"Glasp",cat:"study",url:"https://glasp.co",b:"Summarizes YouTube lectures and articles as you browse.",f:"Free"},
-{n:"Coursera Coach",cat:"study",url:"https://coursera.org",b:"An AI tutor layered into Coursera courses for extra explanations.",f:"Free with course access"},
+{n:"Coursera Coach",cat:"study",url:"https://coursera.org",b:"An AI tutor layered into Coursera courses for extra explanations.",f:"Free"},
 {n:"Numerade",cat:"study",url:"https://numerade.com",b:"Step-by-step video explanations for common textbook problems.",f:"Free tier"},
 {n:"Brainly",cat:"study",url:"https://brainly.com",b:"Community homework help with an AI tutor layered on top.",f:"Free tier"},
 {n:"StudySmarter",cat:"study",url:"https://studysmarter.com",b:"AI-generated flashcards and summaries built from your own uploads.",f:"Free plan"},
 {n:"Recall",cat:"study",url:"https://getrecall.ai",b:"Turns saved articles and videos into a spaced-repetition deck.",f:"Free tier"},
 {n:"Fireflies.ai",cat:"study",url:"https://fireflies.ai",b:"Records and summarizes study group calls and office hours.",f:"Free plan"},
 
-{n:"Wolfram Alpha",cat:"math",url:"https://wolframalpha.com",b:"Solves problems step-by-step, from algebra to differential equations.",f:"Free for basic answers"},
+{n:"Wolfram Alpha",cat:"math",url:"https://wolframalpha.com",b:"Solves problems step-by-step, from algebra to differential equations.",f:"Free basic"},
 {n:"Photomath",cat:"math",url:"https://photomath.com",b:"Point your camera at a problem and see the fully worked solution.",f:"Free"},
-{n:"Symbolab",cat:"math",url:"https://symbolab.com",b:"Step-by-step solver covering algebra, calculus, and statistics.",f:"Free plan, limits"},
-{n:"Mathway",cat:"math",url:"https://mathway.com",b:"Quick answers across levels, from basic math through calculus.",f:"Free answers, steps cost extra"},
+{n:"Symbolab",cat:"math",url:"https://symbolab.com",b:"Step-by-step solver covering algebra, calculus, and statistics.",f:"Free plan"},
+{n:"Mathway",cat:"math",url:"https://mathway.com",b:"Quick answers across levels, from basic math through calculus.",f:"Free answers"},
 {n:"Socratic",cat:"math",url:"https://socratic.org",b:"Snap a photo of any homework question for a plain explanation.",f:"Free"},
 {n:"Microsoft Math Solver",cat:"math",url:"https://mathsolver.microsoft.com",b:"Handwriting and photo input for step-by-step math help.",f:"Free"},
 {n:"GeoGebra",cat:"math",url:"https://geogebra.org",b:"Interactive graphing and geometry with AI-assisted tools built in.",f:"Free"},
 {n:"Desmos",cat:"math",url:"https://desmos.com",b:"A graphing calculator students actually enjoy using.",f:"Free"},
 
-{n:"GitHub Copilot",cat:"code",url:"https://github.com/features/copilot",b:"Autocompletes code and explains what an unfamiliar snippet does.",f:"Free for verified students"},
+{n:"GitHub Copilot",cat:"code",url:"https://github.com/features/copilot",b:"Autocompletes code and explains what an unfamiliar snippet does.",f:"Free for students"},
 {n:"Cursor",cat:"code",url:"https://cursor.com",b:"A code editor built around an AI pair programmer.",f:"Free tier"},
 {n:"Replit AI",cat:"code",url:"https://replit.com",b:"Write, run, and debug code in the browser — no setup required.",f:"Free plan"},
-{n:"Codeium",cat:"code",url:"https://codeium.com",b:"Free AI autocomplete that works inside most popular code editors.",f:"Free for individuals"},
+{n:"Codeium",cat:"code",url:"https://codeium.com",b:"Free AI autocomplete that works inside most popular code editors.",f:"Free"},
 {n:"Tabnine",cat:"code",url:"https://tabnine.com",b:"Privacy-focused code completion trained on permissively licensed code.",f:"Free tier"},
 {n:"Amazon Q Developer",cat:"code",url:"https://aws.amazon.com/q/developer",b:"A coding assistant with a generous free tier for individuals.",f:"Free tier"},
 {n:"AskCodi",cat:"code",url:"https://askcodi.com",b:"Generates code snippets and explains errors in plain English.",f:"Free plan"},
@@ -448,36 +485,36 @@ const TOOLS = [
 {n:"Gamma",cat:"slides",url:"https://gamma.app",b:"Type an outline and it designs the whole slide deck for you.",f:"Free plan"},
 {n:"Tome",cat:"slides",url:"https://tome.app",b:"AI-generated presentations built around a narrative structure.",f:"Free tier"},
 {n:"Beautiful.ai",cat:"slides",url:"https://beautiful.ai",b:"Templates that auto-adjust their layout as you add content.",f:"Free trial"},
-{n:"SlidesAI",cat:"slides",url:"https://slidesai.io",b:"Turns a block of text into a Google Slides deck in minutes.",f:"Free plan, limits"},
+{n:"SlidesAI",cat:"slides",url:"https://slidesai.io",b:"Turns a block of text into a Google Slides deck in minutes.",f:"Free plan"},
 {n:"Canva Presentations",cat:"slides",url:"https://canva.com",b:"Magic Design builds a deck from a prompt or your own text.",f:"Free plan"},
 {n:"Slidesgo",cat:"slides",url:"https://slidesgo.com",b:"Free templates with an AI presentation maker built right in.",f:"Free"},
 {n:"Plus AI",cat:"slides",url:"https://plusai.com",b:"AI slide generation that works directly inside Google Slides.",f:"Free trial"},
 {n:"Decktopus",cat:"slides",url:"https://decktopus.com",b:"Answers a few questions, then builds a full deck for you.",f:"Free plan"},
 
 {n:"Canva Magic Studio",cat:"design",url:"https://canva.com",b:"Background remover, image generator, and design tools in one place.",f:"Free plan"},
-{n:"Adobe Firefly",cat:"design",url:"https://firefly.adobe.com",b:"Generates and edits images, built to be safer for commercial use.",f:"Free monthly credits"},
+{n:"Adobe Firefly",cat:"design",url:"https://firefly.adobe.com",b:"Generates and edits images, built to be safer for commercial use.",f:"Free credits"},
 {n:"Microsoft Designer",cat:"design",url:"https://designer.microsoft.com",b:"Text-to-image and social graphics, powered by AI.",f:"Free"},
-{n:"Ideogram",cat:"design",url:"https://ideogram.ai",b:"Especially good at generating readable text inside images, like posters.",f:"Free daily credits"},
-{n:"Leonardo AI",cat:"design",url:"https://leonardo.ai",b:"Fine-tuned image models for illustrations and concept art.",f:"Free daily credits"},
-{n:"Playground AI",cat:"design",url:"https://playground.com",b:"Easy image generation and editing with a simple interface.",f:"Free daily credits"},
-{n:"Remove.bg",cat:"design",url:"https://remove.bg",b:"Strips the background out of a photo in a single click.",f:"Free, resolution limits"},
+{n:"Ideogram",cat:"design",url:"https://ideogram.ai",b:"Especially good at generating readable text inside images, like posters.",f:"Free credits"},
+{n:"Leonardo AI",cat:"design",url:"https://leonardo.ai",b:"Fine-tuned image models for illustrations and concept art.",f:"Free credits"},
+{n:"Playground AI",cat:"design",url:"https://playground.com",b:"Easy image generation and editing with a simple interface.",f:"Free credits"},
+{n:"Remove.bg",cat:"design",url:"https://remove.bg",b:"Strips the background out of a photo in a single click.",f:"Free"},
 {n:"Photoroom",cat:"design",url:"https://photoroom.com",b:"Background removal plus quick product-style photo editing.",f:"Free plan"},
-{n:"Cleanup.pictures",cat:"design",url:"https://cleanup.pictures",b:"Erases unwanted objects or people from a photo.",f:"Free, limits"},
+{n:"Cleanup.pictures",cat:"design",url:"https://cleanup.pictures",b:"Erases unwanted objects or people from a photo.",f:"Free"},
 {n:"Looka",cat:"design",url:"https://looka.com",b:"Generates logo concepts for a club, project, or side hustle.",f:"Free to browse"},
 
 {n:"CapCut",cat:"media",url:"https://capcut.com",b:"Auto-captions, background removal, and templates for short videos.",f:"Free plan"},
-{n:"InVideo AI",cat:"media",url:"https://invideo.io",b:"Turns a text prompt into a finished video with voiceover.",f:"Free plan, watermark"},
+{n:"InVideo AI",cat:"media",url:"https://invideo.io",b:"Turns a text prompt into a finished video with voiceover.",f:"Free plan"},
 {n:"Pictory",cat:"media",url:"https://pictory.ai",b:"Turns a long video or script into short, shareable clips.",f:"Free trial"},
 {n:"Runway",cat:"media",url:"https://runwayml.com",b:"Generative video and editing tools, right from a browser.",f:"Free credits"},
-{n:"HeyGen",cat:"media",url:"https://heygen.com",b:"Creates an AI avatar video from a script — handy for presentations.",f:"Free monthly minutes"},
-{n:"D-ID",cat:"media",url:"https://d-id.com",b:"Animates a still photo into a talking presenter.",f:"Free trial credits"},
-{n:"ElevenLabs",cat:"media",url:"https://elevenlabs.io",b:"Realistic text-to-speech for narrating slides or video projects.",f:"Free monthly characters"},
+{n:"HeyGen",cat:"media",url:"https://heygen.com",b:"Creates an AI avatar video from a script — handy for presentations.",f:"Free minutes"},
+{n:"D-ID",cat:"media",url:"https://d-id.com",b:"Animates a still photo into a talking presenter.",f:"Free trial"},
+{n:"ElevenLabs",cat:"media",url:"https://elevenlabs.io",b:"Realistic text-to-speech for narrating slides or video projects.",f:"Free monthly"},
 {n:"Descript",cat:"media",url:"https://descript.com",b:"Edit audio and video by editing the transcript like a document.",f:"Free plan"},
 {n:"Podcastle",cat:"media",url:"https://podcastle.ai",b:"Records, cleans up, and transcribes podcast-style audio.",f:"Free plan"},
-{n:"Suno",cat:"media",url:"https://suno.com",b:"Generates original background music or songs from a text prompt.",f:"Free monthly credits"},
-{n:"Krisp",cat:"media",url:"https://krisp.ai",b:"Cancels background noise on calls and study group meetings.",f:"Free daily minutes"},
+{n:"Suno",cat:"media",url:"https://suno.com",b:"Generates original background music or songs from a text prompt.",f:"Free credits"},
+{n:"Krisp",cat:"media",url:"https://krisp.ai",b:"Cancels background noise on calls and study group meetings.",f:"Free daily"},
 
-{n:"Notion AI",cat:"productivity",url:"https://notion.com",b:"Summarizes pages, drafts text, and organizes notes inside Notion.",f:"Free, limited AI credits"},
+{n:"Notion AI",cat:"productivity",url:"https://notion.com",b:"Summarizes pages, drafts text, and organizes notes inside Notion.",f:"Free credits"},
 {n:"Todoist",cat:"productivity",url:"https://todoist.com",b:"Quick-add understands natural language like 'essay due Friday 5pm'.",f:"Free plan"},
 {n:"Reclaim.ai",cat:"productivity",url:"https://reclaim.ai",b:"Automatically blocks study time on your calendar around classes.",f:"Free plan"},
 {n:"Google Tasks",cat:"productivity",url:"https://tasks.google.com",b:"Pairs with Gemini to turn a messy to-do list into a real plan.",f:"Free"},
@@ -485,105 +522,99 @@ const TOOLS = [
 {n:"TickTick",cat:"productivity",url:"https://ticktick.com",b:"To-do list with habit tracking and a smart date parser.",f:"Free plan"},
 
 {n:"Duolingo",cat:"language",url:"https://duolingo.com",b:"Bite-sized lessons with an AI-powered 'explain my answer' feature.",f:"Free plan"},
-{n:"DeepL",cat:"language",url:"https://deepl.com",b:"Translation that reads more naturally than most alternatives.",f:"Free plan, character limit"},
+{n:"DeepL",cat:"language",url:"https://deepl.com",b:"Translation that reads more naturally than most alternatives.",f:"Free plan"},
 {n:"Google Translate",cat:"language",url:"https://translate.google.com",b:"Text, camera, and live conversation translation in 100+ languages.",f:"Free"},
-{n:"Speak",cat:"language",url:"https://speak.com",b:"AI conversation practice for speaking a new language out loud.",f:"Free trial lessons"},
-{n:"ELSA Speak",cat:"language",url:"https://elsaspeak.com",b:"Gives feedback on pronunciation, sound by sound.",f:"Free plan, limits"},
+{n:"Speak",cat:"language",url:"https://speak.com",b:"AI conversation practice for speaking a new language out loud.",f:"Free trial"},
+{n:"ELSA Speak",cat:"language",url:"https://elsaspeak.com",b:"Gives feedback on pronunciation, sound by sound.",f:"Free plan"},
 {n:"Microsoft Translator",cat:"language",url:"https://translator.microsoft.com",b:"Real-time translated conversations and lecture captions.",f:"Free"},
 
 {n:"Zotero",cat:"cite",url:"https://zotero.org",b:"Collects sources as you browse and formats your bibliography.",f:"Free"},
 {n:"Mendeley",cat:"cite",url:"https://mendeley.com",b:"Reference manager with PDF annotation and citation plugins.",f:"Free plan"},
 {n:"Scribbr Citation Generator",cat:"cite",url:"https://scribbr.com",b:"Generates APA, MLA, and Chicago citations from a link or ISBN.",f:"Free"},
-{n:"EasyBib",cat:"cite",url:"https://easybib.com",b:"Quick citation generator for websites, books, and articles.",f:"Free plan, limits"},
+{n:"EasyBib",cat:"cite",url:"https://easybib.com",b:"Quick citation generator for websites, books, and articles.",f:"Free plan"},
 {n:"MyBib",cat:"cite",url:"https://mybib.com",b:"No-login citation generator that exports straight to Word.",f:"Free"},
-{n:"Cite This For Me",cat:"cite",url:"https://citethisforme.com",b:"Auto-fills citation fields by scanning a source's URL.",f:"Free plan, limits"},
+{n:"Cite This For Me",cat:"cite",url:"https://citethisforme.com",b:"Auto-fills citation fields by scanning a source's URL.",f:"Free plan"},
 ];
 
-// assign library-style call numbers per category
-const counters = {};
-TOOLS.forEach(t=>{
-  counters[t.cat] = (counters[t.cat]||0)+1;
-  const prefix = t.cat.slice(0,3).toUpperCase();
-  t.id = prefix + "–" + String(counters[t.cat]).padStart(2,"0");
-});
-
-const tabsEl = document.getElementById("tabs");
 const gridEl = document.getElementById("grid");
+const pillsEl = document.getElementById("pills");
 const searchEl = document.getElementById("search");
-const countEl = document.getElementById("count");
+const navCount = document.getElementById("navCount");
 
 let activeCat = "all";
 
-function buildTabs(){
+function catInfo(key){ return CATS.find(c=>c.key===key); }
+
+function buildPills(){
   const all = document.createElement("div");
-  all.className = "tab active";
+  all.className = "pill active";
   all.dataset.cat = "all";
-  all.innerHTML = `<span class="dot" style="--dot:#F7F4EA"></span>All`;
-  tabsEl.appendChild(all);
+  all.innerHTML = `<span class="dot" style="--dot:#0D0D0D"></span> All`;
+  pillsEl.appendChild(all);
 
   CATS.forEach(c=>{
     const n = TOOLS.filter(t=>t.cat===c.key).length;
     const el = document.createElement("div");
-    el.className = "tab";
+    el.className = "pill";
     el.dataset.cat = c.key;
-    el.innerHTML = `<span class="dot" style="--dot:${c.color}"></span>${c.label} <span style="opacity:.5">${n}</span>`;
-    tabsEl.appendChild(el);
+    el.innerHTML = `<span class="dot" style="--dot:${c.color}"></span> ${c.label} <span class="n">${n}</span>`;
+    pillsEl.appendChild(el);
   });
 
-  tabsEl.addEventListener("click", (e)=>{
-    const tab = e.target.closest(".tab");
-    if(!tab) return;
-    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-    tab.classList.add("active");
-    activeCat = tab.dataset.cat;
+  pillsEl.addEventListener("click", (e)=>{
+    const pill = e.target.closest(".pill");
+    if(!pill) return;
+    document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
+    pill.classList.add("active");
+    activeCat = pill.dataset.cat;
     render();
   });
-}
-
-function catColor(key){
-  const c = CATS.find(c=>c.key===key);
-  return c ? c.color : "var(--chalk)";
-}
-function catLabel(key){
-  const c = CATS.find(c=>c.key===key);
-  return c ? c.label : key;
 }
 
 function render(){
   const q = searchEl.value.trim().toLowerCase();
   const filtered = TOOLS.filter(t=>{
     const matchesCat = activeCat === "all" || t.cat === activeCat;
-    const matchesQ = !q || t.n.toLowerCase().includes(q) || t.b.toLowerCase().includes(q) || catLabel(t.cat).toLowerCase().includes(q);
+    const c = catInfo(t.cat);
+    const matchesQ = !q || t.n.toLowerCase().includes(q) || t.b.toLowerCase().includes(q) || c.label.toLowerCase().includes(q);
     return matchesCat && matchesQ;
   });
 
-  countEl.textContent = filtered.length + (filtered.length===1 ? " card" : " cards");
+  navCount.textContent = filtered.length + (filtered.length===1 ? " tool" : " tools");
 
   if(filtered.length === 0){
-    gridEl.innerHTML = `<div class="empty-state">No cards in this drawer. Try another search or subject.</div>`;
+    gridEl.innerHTML = `<div class="empty-state"><div class="emoji">🗂️</div>No tools match that search.<br>Try a different word or category.</div>`;
     return;
   }
 
-  gridEl.innerHTML = filtered.map(t=>`
-    <a class="card" href="${t.url}" target="_blank" rel="noopener noreferrer" style="--accent:${catColor(t.cat)}">
-      <div class="card-tag" style="--accent:${catColor(t.cat)}"></div>
-      <div class="card-top">
-        <span class="card-num">${t.id}</span>
-        <span class="card-num">${catLabel(t.cat)}</span>
-      </div>
+  gridEl.innerHTML = filtered.map((t,i)=>{
+    const c = catInfo(t.cat);
+    const delay = Math.min(i, 14) * 0.035;
+    return `
+    <a class="card" href="${t.url}" target="_blank" rel="noopener noreferrer" style="animation-delay:${delay}s">
+      <div class="card-icon" style="--tint:color-mix(in srgb, ${c.color} 14%, white); --accent:${c.color}">${c.icon}</div>
       <div class="card-name">${t.n}</div>
       <p class="card-blurb">${t.b}</p>
       <div class="card-bottom">
         <span class="card-free">${t.f}</span>
-        <span class="card-link">Visit ↗</span>
+        <span class="card-arrow">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </span>
       </div>
-    </a>
-  `).join("");
+    </a>`;
+  }).join("");
 }
 
-buildTabs();
+buildPills();
 render();
 searchEl.addEventListener("input", render);
+
+document.addEventListener("keydown", (e)=>{
+  if(e.key === "/" && document.activeElement !== searchEl){
+    e.preventDefault();
+    searchEl.focus();
+  }
+});
 </script>
 </body>
 </html>
